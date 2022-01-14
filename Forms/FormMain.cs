@@ -18,15 +18,14 @@ namespace GenieClient
 {
     public partial class FormMain
     {
+        private Guid _sessionID;
+        private Session _session => SessionPool.Instance[_sessionID];
         public FormMain()
         {
-            m_oGlobals = new Genie.Globals();
-            m_oGame = new Genie.Game(ref _m_oGlobals);
-            m_oCommand = new Genie.Command(ref _m_oGlobals);
-            m_oAutoMapper = new Mapper.AutoMapper(ref _m_oGlobals);
-            m_oOutputMain = new FormSkin("main", "Game", ref _m_oGlobals);
-            m_oLegacyPluginHost = new LegacyPluginHost(this, ref _m_oGlobals);
-            m_oPluginHost = new PluginHost(this, ref _m_oGlobals);
+            _sessionID = SessionPool.Instance.CreateSession().SessionID;
+            m_oOutputMain = new FormSkin("main", "Game", SessionPool.Instance[_sessionID].Globals);
+            m_oLegacyPluginHost = new LegacyPluginHost(this, SessionPool.Instance[_sessionID].Globals);
+            m_oPluginHost = new PluginHost(this, SessionPool.Instance[_sessionID].Globals);
             m_PluginDialog = new FormPlugins(ref _m_oGlobals.PluginList);
             // This call is required by the Windows Form Designer.
             InitializeComponent();
@@ -126,7 +125,7 @@ namespace GenieClient
             UpdateMainWindowTitle();
         }
 
-        private Genie.Globals _m_oGlobals;
+        private Genie.Globals _m_oGlobals => _session.Globals;
 
         public Genie.Globals m_oGlobals
         {
@@ -146,7 +145,7 @@ namespace GenieClient
                     _m_oGlobals.ConfigChanged -= Config_ConfigChanged;
                 }
 
-                _m_oGlobals = value;
+                SessionPool.Instance[_sessionID].Globals = value;
                 if (_m_oGlobals != null)
                 {
                     GenieError.EventGenieError += HandleGenieException;
@@ -157,7 +156,7 @@ namespace GenieClient
             }
         }
 
-        private Genie.Game _m_oGame;
+        private Genie.Game _m_oGame => SessionPool.Instance[_sessionID].Game;
 
         public Genie.Game m_oGame
         {
@@ -231,7 +230,7 @@ namespace GenieClient
                     _m_oGame.EventTriggerMove -= Game_EventTriggerMove;
                 }
 
-                _m_oGame = value;
+                SessionPool.Instance[_sessionID].Game = value;
                 if (_m_oGame != null)
                 {
                     _m_oGame.EventParseXML += Plugin_ParsePluginXML;
@@ -254,7 +253,7 @@ namespace GenieClient
             }
         }
 
-        private Genie.Command _m_oCommand;
+        private Genie.Command _m_oCommand => SessionPool.Instance[_sessionID].Command;
 
         public Genie.Command m_oCommand
         {
@@ -314,7 +313,7 @@ namespace GenieClient
                     _m_oCommand.EventChangeIcon -= Command_ChangeIcon;
                 }
 
-                _m_oCommand = value;
+                SessionPool.Instance[_sessionID].Command = value;
                 if (_m_oCommand != null)
                 {
                     _m_oCommand.ListPlugins += ListPlugins;
@@ -364,32 +363,30 @@ namespace GenieClient
             }
         }
 
-        private Mapper.AutoMapper _m_oAutoMapper;
-
         public Mapper.AutoMapper m_oAutoMapper
         {
             [MethodImpl(MethodImplOptions.Synchronized)]
             get
             {
-                return _m_oAutoMapper;
+                return _session.Mapper;
             }
 
             [MethodImpl(MethodImplOptions.Synchronized)]
             set
             {
-                if (_m_oAutoMapper != null)
+                if (_session.Mapper != null)
                 {
-                    _m_oAutoMapper.EventEchoText -= Plugin_EventEchoText;
-                    _m_oAutoMapper.EventSendText -= Plugin_EventSendText;
-                    _m_oAutoMapper.EventVariableChanged -= PluginHost_EventVariableChanged;
+                    _session.Mapper.EventEchoText -= Plugin_EventEchoText;
+                    _session.Mapper.EventSendText -= Plugin_EventSendText;
+                    _session.Mapper.EventVariableChanged -= PluginHost_EventVariableChanged;
                 }
 
-                _m_oAutoMapper = value;
-                if (_m_oAutoMapper != null)
+                _session.Mapper = value;
+                if (_session.Mapper != null)
                 {
-                    _m_oAutoMapper.EventEchoText += Plugin_EventEchoText;
-                    _m_oAutoMapper.EventSendText += Plugin_EventSendText;
-                    _m_oAutoMapper.EventVariableChanged += PluginHost_EventVariableChanged;
+                    _session.Mapper.EventEchoText += Plugin_EventEchoText;
+                    _session.Mapper.EventSendText += Plugin_EventSendText;
+                    _session.Mapper.EventVariableChanged += PluginHost_EventVariableChanged;
                 }
             }
         }
@@ -1403,8 +1400,8 @@ namespace GenieClient
             {
                 if (m_oGlobals.MacroList.Contains(e.KeyData) == true)
                 {
-                    m_oCommand.ParseCommand(((Genie.Macros.Macro)m_oGlobals.MacroList[e.KeyData]).sAction, true, true);
-                    string argsText = "";
+                    
+                    string argsText = m_oCommand.ParseCommand(((Genie.Macros.Macro)m_oGlobals.MacroList[e.KeyData]).sAction, true, true);
                     var argoColor = Color.Transparent;
                     var argoBgColor = Color.Transparent;
                     Genie.Game.WindowTarget argoTargetWindow = Genie.Game.WindowTarget.Main;
@@ -3439,7 +3436,7 @@ namespace GenieClient
             if (Information.IsNothing(oForm))
             {
                 var argoGlobal = m_oGlobals;
-                oForm = new FormSkin(sID, sName, ref _m_oGlobals);
+                oForm = new FormSkin(sID, sName, SessionPool.Instance[_sessionID].Globals);
                 oForm.EventLinkClicked += FormSkin_LinkClicked;
                 oForm.MdiParent = this;
                 m_oFormList.Add(oForm);

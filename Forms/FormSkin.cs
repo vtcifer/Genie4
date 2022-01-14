@@ -10,21 +10,19 @@ namespace GenieClient
 {
     public partial class FormSkin : Form
     {
-        public FormSkin()
-        {
-            InitializeComponent();
-        }
+        
 
-        public FormSkin(string sID, string sTitle, ref Genie.Globals oGlobal)
+        public FormSkin(string sID, string sTitle, Genie.Globals oGlobals)
         {
             // This call is required by the Windows Form Designer.
+        
             InitializeComponent();
 
             // Add any initialization after the InitializeComponent() call.
             ID = sID;
             Text = sTitle;
             Title = sTitle;
-            Globals = oGlobal;
+            Globals = oGlobals;
             RichTextBoxOutput.FormParent = this;
             LoadSkin();
         }
@@ -626,7 +624,10 @@ namespace GenieClient
             Cursor = Cursors.Default;
         }
 
-        public Genie.Globals Globals { get; }
+        public Genie.Globals Globals 
+        {
+            get;
+        }
 
         public bool IsMainWindow
         {
