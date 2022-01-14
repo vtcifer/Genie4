@@ -4789,12 +4789,19 @@ namespace GenieClient
 
         private void EndUpdate()
         {
-            FormSkin oFormSkin;
-            var oEnumerator = m_oFormList.GetEnumerator();
-            while (oEnumerator.MoveNext())
+            try
             {
-                oFormSkin = (FormSkin)oEnumerator.Current;
-                oFormSkin.RichTextBoxOutput.EndTextUpdate();
+                if (m_oFormList.AcquireReaderLock())
+                {
+                    foreach(FormSkin skin in m_oFormList)
+                    {
+                        skin.RichTextBoxOutput.EndTextUpdate();
+                    }
+                }
+            }
+            finally
+            {
+                m_oFormList.ReleaseReaderLock();
             }
         }
 
@@ -6287,11 +6294,9 @@ namespace GenieClient
         private void UpdateMonoFont()
         {
             m_oOutputMain.RichTextBoxOutput.MonoFont = m_oGlobals.Config.MonoFont;
-            var oEnumerator = m_oFormList.GetEnumerator();
-            while (oEnumerator.MoveNext())
+            foreach(FormSkin skin in m_oFormList)
             {
-                FormSkin oForm = (FormSkin)oEnumerator.Current;
-                oForm.RichTextBoxOutput.MonoFont = m_oGlobals.Config.MonoFont;
+                skin.RichTextBoxOutput.MonoFont = m_oGlobals.Config.MonoFont;
             }
         }
 
@@ -6878,16 +6883,22 @@ namespace GenieClient
 
         private void AddWindow(string sName)
         {
-            var oEnumerator = m_oFormList.GetEnumerator();
-            while (oEnumerator.MoveNext())
+            try
             {
-                if (Conversions.ToBoolean(Operators.ConditionalCompareObjectEqual(((FormSkin)oEnumerator.Current).ID, sName.ToLower(), false)))
+                if (m_oFormList.AcquireReaderLock())
                 {
-                    ((FormSkin)oEnumerator.Current).Show();
-                    return;
+                    foreach (FormSkin skin in m_oFormList)
+                    {
+                        if (skin.ID == sName) skin.Show();
+                        return;
+                    }
                 }
             }
-
+            finally
+            {
+                m_oFormList.ReleaseReaderLock();
+            }
+            
             var fo = SafeCreateOutputForm(Conversions.ToString(sName.ToLower()), Conversions.ToString(sName), null, 300, 200, 10, 10, true, null, "", true);
             if (!Information.IsNothing(fo))
             {
