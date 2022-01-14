@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
 using Microsoft.VisualBasic.CompilerServices;
@@ -96,7 +97,7 @@ namespace GenieClient
             return m_oGlobals.PluginPremiumKeyList.ContainsKey(premKey);
         }
 
-        public LegacyPluginHost(Form Form, ref Genie.Globals Globals)
+        public LegacyPluginHost(Form Form, Genie.Globals Globals)
         {
             m_oParent = Form;
             m_oGlobals = Globals;
