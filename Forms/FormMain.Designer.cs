@@ -62,6 +62,7 @@ namespace GenieClient
             this._PluginsEnabledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._AutoMapperEnabledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._MuteSoundsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._DarkModeEnabledToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._ToolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this._ToolStripMenuItemShowXML = new System.Windows.Forms.ToolStripMenuItem();
             this._ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -124,6 +125,8 @@ namespace GenieClient
             this.playnetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.elanthipediaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dRServiceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lichDiscordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.isharonsGenieSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._LabelSpellC = new System.Windows.Forms.Label();
             this._LabelRHC = new System.Windows.Forms.Label();
             this._LabelLHC = new System.Windows.Forms.Label();
@@ -152,8 +155,6 @@ namespace GenieClient
             this._PanelInput = new System.Windows.Forms.Panel();
             this._TextBoxInput = new GenieClient.ComponentTextBox();
             this._OpenFileDialogProfile = new System.Windows.Forms.OpenFileDialog();
-            this.lichDiscordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.isharonsGenieSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._StatusStripMain.SuspendLayout();
             this._MenuStripMain.SuspendLayout();
             this._PanelBars.SuspendLayout();
@@ -347,6 +348,7 @@ namespace GenieClient
             this._PluginsEnabledToolStripMenuItem,
             this._AutoMapperEnabledToolStripMenuItem,
             this._MuteSoundsToolStripMenuItem,
+            this._DarkModeEnabledToolStripMenuItem,
             this._ToolStripSeparator8,
             this._ToolStripMenuItemShowXML,
             this._ToolStripMenuItem1,
@@ -465,6 +467,13 @@ namespace GenieClient
             this._MuteSoundsToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
             this._MuteSoundsToolStripMenuItem.Text = "&Mute Sounds";
             this._MuteSoundsToolStripMenuItem.Click += new System.EventHandler(this.MuteSoundsToolStripMenuItem_Click);
+            // 
+            // _DarkModeEnabledToolStripMenuItem
+            // 
+            this._DarkModeEnabledToolStripMenuItem.Name = "_DarkModeEnabledToolStripMenuItem";
+            this._DarkModeEnabledToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this._DarkModeEnabledToolStripMenuItem.Text = "Dark Mode";
+            this._DarkModeEnabledToolStripMenuItem.Click += new System.EventHandler(this.DarkModeEnabledToolStripMenuItem_Click);
             // 
             // _ToolStripSeparator8
             // 
@@ -878,45 +887,45 @@ namespace GenieClient
             // _ToolStripSeparator3
             // 
             this._ToolStripSeparator3.Name = "_ToolStripSeparator3";
-            this._ToolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this._ToolStripSeparator3.Size = new System.Drawing.Size(165, 6);
             // 
             // _ChangelogToolStripMenuItem
             // 
             this._ChangelogToolStripMenuItem.Name = "_ChangelogToolStripMenuItem";
-            this._ChangelogToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this._ChangelogToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this._ChangelogToolStripMenuItem.Text = "&Changelog";
             this._ChangelogToolStripMenuItem.Click += new System.EventHandler(this.ChangelogToolStripMenuItem_Click);
             // 
             // _ToolStripSeparator10
             // 
             this._ToolStripSeparator10.Name = "_ToolStripSeparator10";
-            this._ToolStripSeparator10.Size = new System.Drawing.Size(177, 6);
+            this._ToolStripSeparator10.Size = new System.Drawing.Size(165, 6);
             // 
             // _OpenGenieDiscordToolStripMenuItem
             // 
             this._OpenGenieDiscordToolStripMenuItem.Name = "_OpenGenieDiscordToolStripMenuItem";
-            this._OpenGenieDiscordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this._OpenGenieDiscordToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this._OpenGenieDiscordToolStripMenuItem.Text = "&Discord";
             this._OpenGenieDiscordToolStripMenuItem.Click += new System.EventHandler(this.OpenGenieDiscordToolStripMenuItem_Click);
             // 
             // OpenGenieGithubToolStripMenuItem
             // 
             this.OpenGenieGithubToolStripMenuItem.Name = "OpenGenieGithubToolStripMenuItem";
-            this.OpenGenieGithubToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.OpenGenieGithubToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.OpenGenieGithubToolStripMenuItem.Text = "GitHub";
             this.OpenGenieGithubToolStripMenuItem.Click += new System.EventHandler(this.OpenGenieGithubToolStripMenuItem_Click);
             // 
             // _OpenGenieDocsToolStripMenuItem
             // 
             this._OpenGenieDocsToolStripMenuItem.Name = "_OpenGenieDocsToolStripMenuItem";
-            this._OpenGenieDocsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this._OpenGenieDocsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this._OpenGenieDocsToolStripMenuItem.Text = "&Wiki";
             this._OpenGenieDocsToolStripMenuItem.Click += new System.EventHandler(this.OpenGenieWikiToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(165, 6);
             // 
             // toolStripMenuItem1
             // 
@@ -927,7 +936,7 @@ namespace GenieClient
             this.lichDiscordToolStripMenuItem,
             this.isharonsGenieSettingsToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
             this.toolStripMenuItem1.Text = "Community Links";
             // 
             // playnetToolStripMenuItem
@@ -950,6 +959,20 @@ namespace GenieClient
             this.dRServiceToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
             this.dRServiceToolStripMenuItem.Text = "DR Service";
             this.dRServiceToolStripMenuItem.Click += new System.EventHandler(this.dRServiceToolStripMenuItem_Click);
+            // 
+            // lichDiscordToolStripMenuItem
+            // 
+            this.lichDiscordToolStripMenuItem.Name = "lichDiscordToolStripMenuItem";
+            this.lichDiscordToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.lichDiscordToolStripMenuItem.Text = "Lich Discord";
+            this.lichDiscordToolStripMenuItem.Click += new System.EventHandler(this.lichDiscordToolStripMenuItem_Click);
+            // 
+            // isharonsGenieSettingsToolStripMenuItem
+            // 
+            this.isharonsGenieSettingsToolStripMenuItem.Name = "isharonsGenieSettingsToolStripMenuItem";
+            this.isharonsGenieSettingsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.isharonsGenieSettingsToolStripMenuItem.Text = "Isharon\'s Genie Settings";
+            this.isharonsGenieSettingsToolStripMenuItem.Click += new System.EventHandler(this.isharonsGenieSettingsToolStripMenuItem_Click);
             // 
             // _LabelSpellC
             // 
@@ -1313,20 +1336,6 @@ namespace GenieClient
             this._OpenFileDialogProfile.Filter = "Genie Profile|*.xml|All files|*.*";
             this._OpenFileDialogProfile.RestoreDirectory = true;
             this._OpenFileDialogProfile.Title = "Open Profile";
-            // 
-            // lichDiscordToolStripMenuItem
-            // 
-            this.lichDiscordToolStripMenuItem.Name = "lichDiscordToolStripMenuItem";
-            this.lichDiscordToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.lichDiscordToolStripMenuItem.Text = "Lich Discord";
-            this.lichDiscordToolStripMenuItem.Click += new System.EventHandler(this.lichDiscordToolStripMenuItem_Click);
-            // 
-            // isharonsGenieSettingsToolStripMenuItem
-            // 
-            this.isharonsGenieSettingsToolStripMenuItem.Name = "isharonsGenieSettingsToolStripMenuItem";
-            this.isharonsGenieSettingsToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
-            this.isharonsGenieSettingsToolStripMenuItem.Text = "Isharon\'s Genie Settings";
-            this.isharonsGenieSettingsToolStripMenuItem.Click += new System.EventHandler(this.isharonsGenieSettingsToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -3741,6 +3750,30 @@ namespace GenieClient
             }
         }
 
+        internal ToolStripMenuItem DarkModeEnabledToolStripMenuItem
+        {
+            [MethodImpl(MethodImplOptions.Synchronized)]
+            get
+            {
+                return _DarkModeEnabledToolStripMenuItem;
+            }
+
+            [MethodImpl(MethodImplOptions.Synchronized)]
+            set
+            {
+                if (_DarkModeEnabledToolStripMenuItem != null)
+                {
+                    _DarkModeEnabledToolStripMenuItem.Click -= DarkModeEnabledToolStripMenuItem_Click;
+                }
+
+                _DarkModeEnabledToolStripMenuItem = value;
+                if (_DarkModeEnabledToolStripMenuItem != null)
+                {
+                    _DarkModeEnabledToolStripMenuItem.Click += DarkModeEnabledToolStripMenuItem_Click;
+                }
+            }
+        }
+
         private ComponentBars _ComponentBarsSpirit;
 
         internal ComponentBars ComponentBarsSpirit
@@ -4122,6 +4155,7 @@ namespace GenieClient
         private ToolStripMenuItem dRServiceToolStripMenuItem;
         private ToolStripMenuItem lichDiscordToolStripMenuItem;
         private ToolStripMenuItem isharonsGenieSettingsToolStripMenuItem;
+        private ToolStripMenuItem _DarkModeEnabledToolStripMenuItem;
 
         internal ToolStripMenuItem SaveSizedDefaultLayoutToolStripMenuItem
         {

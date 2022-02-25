@@ -6509,6 +6509,14 @@ namespace GenieClient
             }
         }
 
+                case Genie.Config.ConfigFieldUpdated.DarkMode:
+                    {
+                        DarkModeEnabledToolStripMenuItem.Checked = m_oGlobals.Config.bDarkMode;
+                        break;
+                    }
+            }
+        }
+
         private void Command_EventClassChange()
         {
             var al = new Genie.Collections.ArrayList();
@@ -7236,7 +7244,13 @@ namespace GenieClient
         private void AutoMapperEnabledToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AutoMapperEnabledToolStripMenuItem.Checked = !AutoMapperEnabledToolStripMenuItem.Checked;
-            m_oGlobals.Config.bAutoMapper = AutoMapperEnabledToolStripMenuItem.Checked;
+            m_oGlobals.Config.bDarkMode = DarkModeEnabledToolStripMenuItem.Checked;
+        }
+
+        private void DarkModeEnabledToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DarkModeEnabledToolStripMenuItem.Checked = !DarkModeEnabledToolStripMenuItem.Checked;
+            m_oGlobals.Config.bDarkMode = DarkModeEnabledToolStripMenuItem.Checked;
         }
 
         // Connect Using Profile

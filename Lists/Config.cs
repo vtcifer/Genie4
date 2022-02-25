@@ -34,6 +34,7 @@ namespace GenieClient.Genie
         public bool bAbortDupeScript = true;
         public bool bParseGameOnly = false;
         public bool bAutoMapper = true;
+        public bool bDarkMode = false;
         public int iServerActivityTimeout = 180;
         public string sServerActivityCommand = "fatigue";
         public int iUserActivityTimeout = 300;
@@ -290,7 +291,8 @@ namespace GenieClient.Genie
             KeepInput,
             Muted,
             AutoMapper,
-            LogDir
+            LogDir,
+            DarkMode
         }
 
         public Font MonoFont
@@ -991,6 +993,30 @@ namespace GenieClient.Genie
                             }
 
                             ConfigChanged?.Invoke(ConfigFieldUpdated.AutoMapper);
+                            break;
+                        }
+
+                    case "darkmode":
+                        {
+                            var switchExpr12 = sValue.ToLower();
+                            switch (switchExpr12)
+                            {
+                                case "on":
+                                case "true":
+                                case "1":
+                                    {
+                                        bDarkMode = true;
+                                        break;
+                                    }
+
+                                default:
+                                    {
+                                        bDarkMode = false;
+                                        break;
+                                    }
+                            }
+
+                            ConfigChanged?.Invoke(ConfigFieldUpdated.DarkMode);
                             break;
                         }
 
