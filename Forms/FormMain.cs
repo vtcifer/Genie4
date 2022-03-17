@@ -6506,9 +6506,7 @@ namespace GenieClient
                         m_oGlobals.Log.LogDirectory = m_oGlobals.Config.sLogDir;
                         break;
                     }
-            }
-        }
-
+                
                 case Genie.Config.ConfigFieldUpdated.DarkMode:
                     {
                         DarkModeEnabledToolStripMenuItem.Checked = m_oGlobals.Config.bDarkMode;
